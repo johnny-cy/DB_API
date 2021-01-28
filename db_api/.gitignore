@@ -1,0 +1,3 @@
+# created by virtualenv automatically
+*.pyc
+/PJ83_db_api/uwsgi.log
