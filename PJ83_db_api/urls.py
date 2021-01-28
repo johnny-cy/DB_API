@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
-# from django.conf import settings
-# from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
-# from rest_framework.routers import DefaultRouter
-# from db_api import views
+from rest_framework.routers import DefaultRouter
+from db_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('app5/api/mysql/', include("db_api.urls")),
+    path('app5/api/mysql/', include("db_api.urls")),
 
 ]
-# ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
