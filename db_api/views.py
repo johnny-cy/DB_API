@@ -42,6 +42,9 @@ def C_data(request):
         tablename = data['tablename'].lower()
         input_ = data['data']
         model, serializers = main(tablename)
+        if not model or not serializers:
+            return JsonResponse({"message": "model or serializers not found."})
+
         if tablename == "domaintestlog":
             data_serializer = serializers(data=input_, many=True)  
             if data_serializer.is_valid():  
@@ -67,41 +70,12 @@ def R_data(request):
         if not tablename:
             return JsonResponse({'message': 'Params:tablename'})
         tablename = tablename.lower()
-        model, serializers = main(tablename)
-        
-        if tablename == "domaintestlog":
-            domaintestlog = model.objects.using('slave').all()
-            if filter_data:
-                data = json.loads(filter_data)
-                try:
-                    domaintestlog = model.objects.using('slave').complex_filter(data)
-                except Exception as e:
-                    return JsonResponse({'message': f'{e}'})
-
-
-            if domaintestlog.count() == 0:
-                return JsonResponse({'message': 'No data.'})
-            data_serializer = serializers(domaintestlog, many=True)
-            results = {"results": data_serializer.data}
-            return JsonResponse(results, safe=False)
-
-        elif tablename == "domainlistall":
-            domainlistall = model.objects.using('slave').all()
-            if filter_data:
-                data = json.loads(filter_data)
-                try:
-                    domainlistall = model.objects.using('slave').complex_filter(data)
-                except Exception as e:
-                    return JsonResponse({'message': f'{e}'})
-
-
-            if domainlistall.count() == 0:
-                return JsonResponse({'message': 'No data.'})
-            data_serializer = serializers(domainlistall, many=True)
-            results = {"results": data_serializer.data}
-            return JsonResponse(results, safe=False)
+        status, data , err_msg = getData(tablename=tablename, filter_data=filter_data)
+        if status:
+            return JsonResponse({"results": data}, safe=False)
         else:
-            return JsonResponse({"message": "Table doesn't exist."})
+            return JsonResponse({"status": "error", 'message': f'{err_msg}'})
+        
 
 
 @api_view(['PUT'])
@@ -187,13 +161,6 @@ def D_all_data(request, tablename):
             return JsonResponse({"message": "Table doesn't exist."})
 
 
-
-# type_ = [[DomainTestLog, DomainTestLogSerializer],
-#          [DomainListAll, DomainListAllSerializer],
-#          [DomainTestLogDT3, DomainTestLogDT3Serializer],
-#          [DomainListDT3, DomainListDT3Serializer]]
-
-
 def main(tablename):
     if tablename == "domaintestlog":
         model = type_[0][0]
@@ -208,5 +175,30 @@ def main(tablename):
         model= type_[3][0]
         serializers = type_[3][1]
     else:
-        return JsonResponse({"message": "Table doesn't exist."})
+        model = None
+        serializers = None
     return model, serializers
+
+def getData(tablename=tablename, filter_data=filter_data):
+    model, serializers = main(tablename)
+    if not model or not serializers:
+        err_msg = "model or serializers not found."
+        return False, [], err_msg
+
+    if filter_data:
+        data = json.loads(filter_data)
+        try:
+            queryset = model.objects.using('slave').complex_filter(data)
+        except Exception as e:
+            err_msg = f'{e}'
+            return False, [], err_msg
+    else:
+        queryset = model.objects.using('slave').all()
+
+    if queryset.count() == 0:
+        err_msg = 'No data'
+        return False, [], err_msg
+
+    data_serializer = serializers(queryset, many=True)
+    data = data_serializer.data
+    return True, data, ""
