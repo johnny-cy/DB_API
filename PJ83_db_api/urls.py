@@ -19,11 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-from db_api import views
+# from db_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app5/api/mysql/', include("db_api.urls")),
+    # path('app5/api/mysql/', include("db_api.urls")),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
