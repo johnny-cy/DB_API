@@ -208,6 +208,5 @@ def main(tablename):
         model= type_[3][0]
         serializers = type_[3][1]
     else:
-        tablename = None
-        serializers = None
+        return JsonResponse({"message": "Table doesn't exist."})
     return model, serializers
