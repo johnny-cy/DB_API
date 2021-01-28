@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'db_api',
+    # 'db_api',
     'rest_framework', # Django REST framework
     # 'db_api.apps.DbApiConfig',
     'corsheaders', #CORS
