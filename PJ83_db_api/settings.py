@@ -188,6 +188,28 @@ elif ENV == 'ALIYUN':
             'PORT': '3306',
         }
     }
+elif ENV == 'DEV2':
+    """
+    No read-write seperated, both master and slave use same db.
+    """
+    DATABASES = {
+        'default': { # default, master
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'DEV_PJ83BN',
+            'USER': 'root',
+            'PASSWORD': '1qaz@WSX',
+            'HOST': '10.10.0.150',
+            'PORT': '30010',
+        },
+        'slave': { # Read-Only
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'DEV_PJ83BN',
+            'USER': 'root',
+            'PASSWORD': '1qaz@WSX',
+            'HOST': '10.10.0.150',
+            'PORT': '30010',
+        }
+    }
 
 
 # DATABASES = {
