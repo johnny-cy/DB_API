@@ -78,3 +78,40 @@ class ForwardDomainTestLog(models.Model):
     DomainType = models.CharField(max_length=50)
     class Meta:
         db_table = "ForwardDomainTestLog"
+
+
+
+class DomainListDT3(models.Model):
+    """
+    a migrate --fake table.
+    """
+    id = models.AutoField(primary_key=True)
+    AgentID = models.CharField(max_length=30, unique=True)
+    UrlIn = models.CharField(max_length=200)
+    UrlOut = models.CharField(max_length=200)
+    MyZone = models.CharField(max_length=50)
+    HasRun = models.IntegerField()
+    DomainType = models.CharField(max_length=50)
+    CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
+    class Meta:
+        db_table = "DomainListDT3"
+
+
+class DomainTestLogDT3(models.Model):
+    """
+    a migrate --fake table.
+    """
+    id = models.AutoField(primary_key=True)
+    DomainListDT3 = models.ForeignKey(DomainListDT3, on_delete=models.CASCADE)
+    AgentID = models.CharField(max_length=30)
+    TestTime = models.DateTimeField(blank=True, null=True)
+    UrlIn = models.CharField(max_length=200)
+    UrlOut = models.CharField(max_length=200)
+    MyIP = models.CharField(max_length=200)
+    MyZone = models.CharField(max_length=200)
+    Status = models.CharField(max_length=50)
+    Browser = models.CharField(max_length=50)
+    CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
+    DomainType = models.CharField(max_length=50)
+    class Meta:
+        db_table = "DomainTestLogDT3"
