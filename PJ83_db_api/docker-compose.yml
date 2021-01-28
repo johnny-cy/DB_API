@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1qaz@WSX
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 30010:3306
+    networks:
+      db:
+        ipv4_address: 172.30.0.10
+
+  db_api:
+    image: johnnylindocker/crawler:latest
+    container_name: db_api
+    environment:
+      ENV: DEV2
+    volumes:
+      - ./db_api:/workspace
+    command: bash -c "uwsgi --ini /workspace/PJ83_db_api/uwsgi.ini && tail -f /dev/null"
+    ports:
+      - 30011:9005
+    networks:
+      db:
+        ipv4_address: 172.30.0.11
+
+
+networks:
+  db:
+    external: true
