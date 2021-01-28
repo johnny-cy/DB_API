@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 # from db_api import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     # path('app5/api/mysql/', include("db_api.urls")),
 
 
