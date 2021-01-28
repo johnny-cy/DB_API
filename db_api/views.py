@@ -4,8 +4,18 @@ from django.core import serializers
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser, FileUploadParser
 from rest_framework import status
 from rest_framework.decorators import api_view
-from db_api.models import DomainTestLog, DomainListAll
-from db_api.serializers import DomainTestLogSerializer, DomainListAllSerializer
+
+from db_api.models import DomainTestLog
+from db_api.serializers import DomainTestLogSerializer
+from db_api.models import DomainListAll
+from db_api.serializers import DomainListAllSerializer
+from db_api.models import DomainListDT3
+from db_api.serializers import DomainTestLogDT3Serializer
+from db_api.models import DomainTestLogDT3
+from db_api.serializers import DomainListDT3Serializer
+
+
+
 import time
 import json
 
@@ -17,7 +27,9 @@ import json
 '''
 
 type_ = [[DomainTestLog, DomainTestLogSerializer],
-         [DomainListAll, DomainListAllSerializer]]
+         [DomainListAll, DomainListAllSerializer],
+         [DomainTestLogDT3, DomainTestLogDT3Serializer],
+         [DomainListDT3, DomainListDT3Serializer]]
 
 
 @api_view(['POST'])
@@ -175,6 +187,13 @@ def D_all_data(request, tablename):
             return JsonResponse({"message": "Table doesn't exist."})
 
 
+
+# type_ = [[DomainTestLog, DomainTestLogSerializer],
+#          [DomainListAll, DomainListAllSerializer],
+#          [DomainTestLogDT3, DomainTestLogDT3Serializer],
+#          [DomainListDT3, DomainListDT3Serializer]]
+
+
 def main(tablename):
     if tablename == "domaintestlog":
         model = type_[0][0]
@@ -182,6 +201,12 @@ def main(tablename):
     elif tablename == "domainlistall":
         model = type_[1][0]
         serializers = type_[1][1]
+    elif tablename == 'domaintestlogdt3':
+        model= type_[2][0]
+        serializers = type_[2][1]
+    elif tablename == 'domainlistdt3':
+        model= type_[3][0]
+        serializers = type_[3][1]
     else:
         tablename = None
         serializers = None
