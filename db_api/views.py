@@ -179,7 +179,7 @@ def main(tablename):
         serializers = None
     return model, serializers
 
-def getData(tablename=tablename, filter_data=filter_data):
+def getData(tablename, filter_data):
     model, serializers = main(tablename)
     if not model or not serializers:
         err_msg = "model or serializers not found."
