@@ -1,0 +1,5 @@
+Python==3.8.5
+PyMySQL==0.10.1
+Django==2.2
+django-cors-headers==3.5.0
+djangorestframework==3.12.2
