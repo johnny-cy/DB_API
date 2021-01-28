@@ -25,5 +25,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('app5/api/mysql/', include("db_api.urls")),
 
-]
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
