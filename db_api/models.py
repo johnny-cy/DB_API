@@ -109,11 +109,11 @@ class DomainTestLogDT3(models.Model):
     MyZone = models.CharField(max_length=200)
     Status = models.CharField(max_length=50)
     Browser = models.CharField(max_length=50)
-    IPScreenshot = models.CharField(max_length=300)
-    ProductScreenshot1 = models.CharField(max_length=300)
-    ProductScreenshot2 = models.CharField(max_length=300)
-    ProductScreenshot3 = models.CharField(max_length=300)
-    ProductScreenshot4 = models.CharField(max_length=300)
+    IPScreenshot = models.CharField(max_length=300, null=True)
+    ProductScreenshot1 = models.CharField(max_length=300, null=True)
+    ProductScreenshot2 = models.CharField(max_length=300, null=True)
+    ProductScreenshot3 = models.CharField(max_length=300, null=True)
+    ProductScreenshot4 = models.CharField(max_length=300, null=True)
     CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
     class Meta:
         db_table = "DomainTestLogDT3"
