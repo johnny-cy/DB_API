@@ -89,7 +89,7 @@ class DomainListDT3(models.Model):
     AgentID = models.CharField(max_length=50)
     Domain = models.CharField(max_length=200)
     HasRun = models.IntegerField()
-    Latest = models.IntegerField()
+    Latest = models.IntegerField(default=1)
     CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
     class Meta:
         db_table = "DomainListDT3"
