@@ -117,6 +117,7 @@ class DomainListDT3Serializer(serializers.ModelSerializer):
             'id',
             'AgentID',
             'Domain',
+            'Latest',
             'HasRun',
             'CreatedTime',
         )
@@ -141,7 +142,11 @@ class DomainTestLogDT3Serializer(serializers.ModelSerializer):
             'MyZone',
             'Status',
             'Browser',
+            'IPScreenshot',
+            'ProductScreenshot1',
+            'ProductScreenshot2',
+            'ProductScreenshot3',
+            'ProductScreenshot4',
             'CreatedTime',
-            'DomainType',
         )
         

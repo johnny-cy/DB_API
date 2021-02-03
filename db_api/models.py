@@ -88,7 +88,7 @@ class DomainListDT3(models.Model):
     id = models.AutoField(primary_key=True)
     AgentID = models.CharField(max_length=50)
     Domain = models.CharField(max_length=200)
-    HasRun = models.IntegerField()
+    HasRun = models.IntegerField(default=0)
     Latest = models.IntegerField(default=1)
     CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
     class Meta:
@@ -109,7 +109,11 @@ class DomainTestLogDT3(models.Model):
     MyZone = models.CharField(max_length=200)
     Status = models.CharField(max_length=50)
     Browser = models.CharField(max_length=50)
+    IPScreenshot = models.CharField(max_length=300)
+    ProductScreenshot1 = models.CharField(max_length=300)
+    ProductScreenshot2 = models.CharField(max_length=300)
+    ProductScreenshot3 = models.CharField(max_length=300)
+    ProductScreenshot4 = models.CharField(max_length=300)
     CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
-    DomainType = models.CharField(max_length=50)
     class Meta:
         db_table = "DomainTestLogDT3"
