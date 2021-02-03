@@ -57,6 +57,18 @@ def C_data(request):
                 data_serializer.save()
                 return JsonResponse(data, safe=False, status=status.HTTP_201_CREATED)
             return JsonResponse(data_serializer.errors, safe=False, status=status.HTTP_400_BAD_REQUEST)
+        if tablename == "domaintestlogdt3":
+            data_serializer = serializers(data=input_, many=True)  
+            if data_serializer.is_valid():  
+                data_serializer.save()
+                return JsonResponse(data, safe=False, status=status.HTTP_201_CREATED)
+            return JsonResponse(data_serializer.errors, safe=False, status=status.HTTP_400_BAD_REQUEST)
+        if tablename == "domainlistdt3":
+            data_serializer = serializers(data=input_, many=True)  
+            if data_serializer.is_valid():  
+                data_serializer.save()
+                return JsonResponse(data, safe=False, status=status.HTTP_201_CREATED)
+            return JsonResponse(data_serializer.errors, safe=False, status=status.HTTP_400_BAD_REQUEST)
         else:
             return JsonResponse({"message": "Table doesn't exist."})
 
