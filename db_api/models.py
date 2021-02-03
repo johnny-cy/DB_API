@@ -86,12 +86,10 @@ class DomainListDT3(models.Model):
     a migrate --fake table.
     """
     id = models.AutoField(primary_key=True)
-    AgentID = models.CharField(max_length=30, unique=True)
-    UrlIn = models.CharField(max_length=200)
-    UrlOut = models.CharField(max_length=200)
-    MyZone = models.CharField(max_length=50)
+    AgentID = models.CharField(max_length=50)
+    Domain = models.CharField(max_length=200)
     HasRun = models.IntegerField()
-    DomainType = models.CharField(max_length=50)
+    Latest = models.IntegerField()
     CreatedTime = models.DateTimeField(auto_now_add=True, null=True)
     class Meta:
         db_table = "DomainListDT3"

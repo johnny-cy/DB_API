@@ -116,11 +116,8 @@ class DomainListDT3Serializer(serializers.ModelSerializer):
         fields = (
             'id',
             'AgentID',
-            'UrlIn',
-            'UrlOut',
-            'MyZone',
+            'Domain',
             'HasRun',
-            'DomainType',
             'CreatedTime',
         )
 # DomainTestLogDT3
