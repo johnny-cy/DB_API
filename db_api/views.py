@@ -36,6 +36,8 @@ type_ = [[DomainTestLog, DomainTestLogSerializer],
 def C_data(request):
     ''' add new data to database.'''
     data = JSONParser().parse(request)
+    print("data = ")
+    print(data)
     if request.method == 'POST':
         if 'tablename' not in data:
             return JsonResponse({"message": "Body:tablename"})
