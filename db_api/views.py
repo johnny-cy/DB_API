@@ -38,6 +38,7 @@ def C_data(request):
     data = JSONParser().parse(request)
     print("data = ")
     print(data)
+    print("data type is ", type(data))
     if request.method == 'POST':
         if 'tablename' not in data:
             return JsonResponse({"message": "Body:tablename"})
