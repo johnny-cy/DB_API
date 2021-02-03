@@ -35,7 +35,7 @@ type_ = [[DomainTestLog, DomainTestLogSerializer],
 @api_view(['POST'])
 def C_data(request):
     ''' add new data to database.'''
-    data = JSONParser().parse(request) # return dict
+    data = JSONParser().parse(request) 
     print("data = ")
     print(data)
     print("data type is ", type(data))
